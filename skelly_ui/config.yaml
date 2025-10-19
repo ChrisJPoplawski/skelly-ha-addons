@@ -1,5 +1,5 @@
 name: "Skelly UI (Player + BLE + Pi)"
-version: "0.1.3"
+version: "0.1.4"
 slug: "skelly_ui"
 description: "Ultra Skelly controller: playlist web app + optional BLE + optional Pi servos/LEDs."
 arch:
