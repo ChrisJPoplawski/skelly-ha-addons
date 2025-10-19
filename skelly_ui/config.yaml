@@ -1,0 +1,30 @@
+name: "Skelly UI (Player + BLE + Pi)"
+version: "0.1.0"
+slug: "skelly_ui"
+description: "Ultra Skelly controller: playlist web app + optional BLE + optional Pi servos/LEDs."
+arch:
+  - amd64
+  - aarch64
+  - armv7
+startup: services
+ingress: true
+ingress_port: 8099
+ingress_entry: /
+panel_icon: mdi:bone
+panel_title: Skelly
+homeassistant: 2024.9.0
+host_network: true
+apparmor: false
+audio: true
+uart: true
+gpio: true
+udev: true
+host_dbus: true
+privileged:
+  - SYS_ADMIN
+  - SYS_RAWIO
+  - SYS_NICE
+options:
+  with_ble_ui: true
+schema:
+  with_ble_ui: bool

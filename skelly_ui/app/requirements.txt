@@ -1,0 +1,4 @@
+Flask==3.0.3
+python-vlc==3.0.20123
+waitress==3.0.0
+bleak==0.22.3
