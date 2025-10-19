@@ -4,11 +4,13 @@ FROM ${BUILD_FROM}
 ENV LANG=C.UTF-8
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# System deps
 RUN apk add --no-cache \
     python3 py3-pip python3-dev build-base \
     vlc bluez udev alsa-utils pulseaudio tzdata git bash py3-virtualenv \
     ttf-dejavu ttf-liberation
 
+# App code
 WORKDIR /opt/skelly
 COPY app/ /opt/skelly/
 
@@ -23,10 +25,10 @@ COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
 # ---- s6 service for your app ----
-# (Home Assistant base uses s6; provide a simple service that execs run.sh)
 COPY etc/ /etc/
 # ---------------------------------
 
 EXPOSE 8099
-# IMPORTANT: let the image start via s6 init, not your script directly
-CMD [ "/init" ]
+
+# IMPORTANT: Let the base image's s6 init be PID 1
+CMD ["/init"]

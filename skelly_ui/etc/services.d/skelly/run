@@ -1,4 +1,5 @@
-#!/usr/bin/execlineb -P
-with-contenv
+#!/usr/bin/with-contenv bash
+set -euo pipefail
+
 # hand off to your start script (keeps PID/signals correct under s6)
 exec /run.sh
