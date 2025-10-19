@@ -3,8 +3,8 @@ from flask import Flask, render_template, request, redirect, url_for, send_from_
 import vlc
 
 BASE_DIR = pathlib.Path(__file__).parent.resolve()
-DATA_DIR = BASE_DIR / "data"
-MUSIC_DIR = BASE_DIR / "music"
+DATA_DIR  = pathlib.Path(os.getenv("SKELLY_DATA_DIR", "/data/skelly/data"))
+MUSIC_DIR = pathlib.Path(os.getenv("SKELLY_MUSIC_DIR", "/data/skelly/music"))
 BLE_DIR = BASE_DIR / "ble-ui"
 QUEUE_JSON = DATA_DIR / "queue.json"
 STATE_JSON = DATA_DIR / "state.json"
