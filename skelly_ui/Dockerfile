@@ -12,13 +12,21 @@ RUN apk add --no-cache \
 WORKDIR /opt/skelly
 COPY app/ /opt/skelly/
 
+# Python venv & deps
 RUN python3 -m venv /opt/venv && . /opt/venv/bin/activate && \
     pip install --upgrade pip setuptools wheel && \
     pip install -r requirements.txt && \
     ( [ -f requirements-additions.txt ] && pip install -r requirements-additions.txt || true )
 
+# Start script your app uses
 COPY run.sh /run.sh
-RUN chmod a+x /run.sh
+RUN chmod +x /run.sh
+
+# ---- s6 service for your app ----
+# (Home Assistant base uses s6; provide a simple service that execs run.sh)
+COPY etc/ /etc/
+# ---------------------------------
 
 EXPOSE 8099
-CMD ["/run.sh"]
+# IMPORTANT: let the image start via s6 init, not your script directly
+CMD [ "/init" ]

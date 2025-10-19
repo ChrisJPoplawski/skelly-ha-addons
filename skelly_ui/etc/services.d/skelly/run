@@ -1,0 +1,4 @@
+#!/usr/bin/execlineb -P
+with-contenv
+# hand off to your start script (keeps PID/signals correct under s6)
+exec /run.sh
